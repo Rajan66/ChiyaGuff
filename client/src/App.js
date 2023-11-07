@@ -1,13 +1,23 @@
-import React from "react";
-import { Container, AppBar, Typography, Grow, Grid } from '@mui/material'
-import logo from './images/koala.png'
-import useStyles from './styles';
+import React, { useEffect } from "react";
+import { Container, AppBar, Typography, Grow, Grid } from '@mui/material';
+import logo from './images/koala.png';
 
+
+import useStyles from './styles';
+import { useDispatch } from 'react-redux';
+
+import { getPosts } from './actions/posts'
 import Form from "./components/Form/Form";
 import Posts from "./components/Posts/Posts";
 
 const App = () => {
     const classes = useStyles();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getPosts());
+    }, [dispatch])
+
     return (
         <Container maxWidth="lg">
             <AppBar className={classes.appbar} position="static" color="inherit">
