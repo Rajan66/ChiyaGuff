@@ -1,6 +1,4 @@
-
 import { makeStyles } from '@mui/styles';
-
 
 export default makeStyles((theme) => ({
     root: {
@@ -9,16 +7,19 @@ export default makeStyles((theme) => ({
         },
     },
     paper: {
-        padding: 2,
+        padding: 10,
     },
     form: {
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'center',
     },
+    input:{
+        margin:10
+    },
     fileInput: {
         width: '97%',
-        margin: '10px 0',
+        margin: 10,
     },
     buttonSubmit: {
         marginBottom: 10,

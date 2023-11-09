@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { getPosts } from './actions/posts'
 import Form from "./components/Form/Form";
 import Posts from "./components/Posts/Posts";
+import Navbar from "./components/Navbar/Navbar";
 
 const App = () => {
     const classes = useStyles();
@@ -20,14 +21,15 @@ const App = () => {
 
     return (
         <Container maxWidth="lg">
-            <AppBar className={classes.appbar} position="static" color="inherit">
+            <Navbar />
+            {/* <AppBar className={classes.appbar} position="static" color="inherit">
                 <Typography className={classes.heading} variant="h2" align="center">SocialSphere</Typography>
                 <img className={classes.img} src={logo} alt="memories" height="60" />
-            </AppBar>
+            </AppBar> */}
             <Grow in>
                 <Container>
-                    <Grid container justifyContent="space-between" alignItems="stretch" spacing={3}>
-                        <Grid item xs={12} sm={7}>
+                    <Grid container justifyContent="center">
+                        <Grid item xs={12} sm={6} >
                             <Posts />
                         </Grid>
                         <Grid item xs={12} sm={4}>
