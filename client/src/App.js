@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, AppBar, Typography, Grow, Grid } from '@mui/material';
 import logo from './images/koala.png';
 
@@ -14,10 +14,11 @@ import Navbar from "./components/Navbar/Navbar";
 const App = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const [currentId, setCurrentId] = useState(null);
 
     useEffect(() => {
         dispatch(getPosts());
-    }, [dispatch])
+    }, [currentId, dispatch])
 
     return (
         <Container maxWidth="lg">
@@ -30,10 +31,10 @@ const App = () => {
                 <Container>
                     <Grid container justifyContent="center">
                         <Grid item xs={12} sm={6} >
-                            <Posts />
+                            <Posts setCurrentId={setCurrentId} />
                         </Grid>
                         <Grid item xs={12} sm={4}>
-                            <Form />
+                            <Form currentId={currentId} setCurrentId={setCurrentId} />
                         </Grid>
                     </Grid>
                 </Container>
