@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Container, AppBar, Typography, Grow, Grid } from '@mui/material';
-import logo from './images/koala.png';
 
-
-import useStyles from './styles';
 import { useDispatch } from 'react-redux';
+import useStyles from './styles'
 
 import { getPosts } from './actions/posts'
 import Form from "./components/Form/Form";
 import Posts from "./components/Posts/Posts";
 import Navbar from "./components/Navbar/Navbar";
+
+
 
 const App = () => {
     const classes = useStyles();
@@ -29,7 +29,7 @@ const App = () => {
             </AppBar> */}
             <Grow in>
                 <Container>
-                    <Grid container justifyContent="center">
+                    <Grid container  justifyContent="center">
                         <Grid item xs={12} sm={6} >
                             <Posts setCurrentId={setCurrentId} />
                         </Grid>
