@@ -6,10 +6,11 @@ import { GoogleLogin, googleLogout } from '@react-oauth/google';
 import LockOutLinedIcon from '@mui/icons-material/LockOutlined'
 // import { useStyles } from './styles'
 import Input from './Input';
+import { useDispatch } from 'react-redux';
 
 const Auth = () => {
   // const classes = useStyles();
-
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
 
@@ -29,6 +30,21 @@ const Auth = () => {
   }
 
   const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword)
+
+  const googleSuccess = (res) => {
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+    try {
+      dispatch({ type: 'AUTH', data: { result, token } });
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const googleFailure = (error) => {
+    console.log(error)
+    console.log('Google Sign In was unsuccessful. Try again later!')
+  }
 
   return (
     <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_API_TOKEN}>
@@ -59,7 +75,7 @@ const Auth = () => {
                   {isSignUp ? 'Already have an account? Sign in' : 'Dont have an account? Sign Up'}
                 </Button>
 
-                {isSignUp && <GoogleLogin onSuccess={(response) => console.log(response)} onError={() => console.log('Error')} />}
+                {isSignUp && <GoogleLogin onSuccess={googleSuccess} onError={googleFailure} cookiePolicy="single_host_origin" />}
 
               </Grid>
             </Grid>
