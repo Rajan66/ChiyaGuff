@@ -1,40 +1,29 @@
 import React from 'react'
-import { Grid,Avatar } from '@mui/material'
-import "./Navbar.css";
-import insta_log from '../../images/logoinsta.png'
-import home from '../../images/home.svg'
-import message from '../../images/message.svg'
-import find from '../../images/find.svg'
-import react from '../../images/love.svg'
-import dp from '../../images/dp6.png'
-
+import { AppBar, Avatar, Button, Toolbar, Typography } from '@mui/material'
+import useStyles from './styles'
+import logo from '../../images/koala.png'
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  return (
-   
-        <div>
-            <div className="navbar__barContent">
-                <Grid container>
-                    <Grid item xs={2}> </Grid>
-                    <Grid item xs={3}>
-                        <img className="navbar_logo" src={insta_log} width="105px" />
-                    </Grid>
-                    <Grid item xs={3}>
-                       <input text="text" className="navbar__searchBar" placeholder="Search" />
-                    </Grid>
-                    <Grid item xs={3} style={{"display":"flex"}}>
-                        <img className="navbar__img" src={home} width="25px"/>
-                        <img className="navbar__img" src={message} width="25px" />
-                        <img className="navbar__img" src={find} width="25px" />
-                        <img className="navbar__img" src={react} width="25px" />
-                        <Avatar src={dp} className="navbar__img" style={{"maxWidth":"25px","maxHeight":"25px"}} />
-                    </Grid>
-                    <Grid item xs={1}></Grid>
-                </Grid>
+    const classes = useStyles()
+    const user = null;
+    return (
+        <AppBar className={classes.appbar} position="static" style={{ flexDirection: "row" }} color="inherit">
+            <div classes={classes.brandContainer}>
+                <Typography component={Link} to="/" className={classes.heading} variant="h2" align='left'>SocialSphere</Typography>
+                <img className={classes.image} src={logo} alt="memories" height="60" align='right' />
             </div>
-        </div>
-     
-  )
+            <Toolbar className={classes.toolbar} >
+                {user ? (<div classes={classes.profile}>
+                    <Avatar alt={user.result.name} src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
+                    <Typography className={classes.username} variant='h6'>{user.result.name}</Typography>
+                    <Button variant='contained' className={classes.logout} color='secondary'>Logout</Button>
+                </div>) : (
+                    <Button component={Link} to='/auth' variant='contained' color='primary'>Sign In</Button>
+                )}
+            </Toolbar>
+        </AppBar>
+    )
 }
 
 export default Navbar
