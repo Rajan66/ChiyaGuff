@@ -8,7 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import { useDispatch } from 'react-redux';
 
 
-import { deletePost } from '../../../actions/posts'
+import { deletePost,likePost } from '../../../actions/posts'
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch()
@@ -41,7 +41,7 @@ const Post = ({ post, setCurrentId }) => {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
+          <IconButton aria-label="add to favorites" onClick={dispatch(likePost(post._id))}>
             <FavoriteIcon />
           </IconButton>
           <IconButton aria-label="share">
