@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Avatar, Button, Typography, Paper, Grid, Container } from '@mui/material';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { GoogleLogin, googleLogout } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 
 import LockOutLinedIcon from '@mui/icons-material/LockOutlined'
 // import { useStyles } from './styles'
@@ -10,20 +10,29 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from 'jwt-decode';
 
+import { signin, signup } from '../../actions/auth'
+
 const Auth = () => {
+  const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '', }
   // const classes = useStyles();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [formData, setFormData] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
 
-  const handleSubmit = () => {
-
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (isSignUp) {
+      dispatch(signup(formData, navigate))
+    } else {
+      dispatch(signin(formData, navigate))
+    }
+    console.log(formData)
   }
 
   const handleChange = (e) => {
-    e.preventDefault()
-    console.log(e)
+    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   const switchMode = () => {
@@ -44,7 +53,6 @@ const Auth = () => {
     }
   }
 
-
   const googleFailure = (error) => {
     console.log(error)
     console.log('Google Sign In was unsuccessful. Try again later!')
@@ -63,14 +71,14 @@ const Auth = () => {
               {isSignUp && (
                 <>
 
-                  <Input name="firstName" label="First Name" onChange={handleChange} autoFocus half />
-                  <Input name="lastName" label="Last Name" onChange={handleChange} half />
+                  <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half />
+                  <Input name="lastName" label="Last Name" handleChange={handleChange} half />
 
                 </>
               )}
-              <Input name="email" label="Email Address" onChange={handleChange} type='email' />
-              <Input name="password" label="Password" onChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
-              {isSignUp && <Input name="confirmPassword" label="Repeat Password" onChange={handleChange} type="password" />}
+              <Input name="email" label="Email Address" handleChange={handleChange} type='email' />
+              <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
+              {isSignUp && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" />}
             </Grid>
             <Button type="submit" fullWidth variant="contained" color="primary">{isSignUp ? 'Sign Up' : 'Sign In'}</Button>
             <Grid container justifyContent="flex-end">

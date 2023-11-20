@@ -2,7 +2,7 @@ import React from 'react'
 import { TextField, Grid, InputAdornment, IconButton } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 
-const Input = ({ name, label, half, type,handleChange,autoFocus,handleShowPassword }) => {
+const Input = ({ name, label, half, type, handleChange, autoFocus, handleShowPassword }) => {
     return (
         <Grid item xs={12} sm={half ? 6 : 12}>
             <TextField
