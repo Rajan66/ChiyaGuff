@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Avatar, Button, Typography, Paper, Grid, Container, TextField } from '@mui/material';
+import { Avatar, Button, Typography, Paper, Grid, Container } from '@mui/material';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
 
@@ -7,9 +7,12 @@ import LockOutLinedIcon from '@mui/icons-material/LockOutlined'
 // import { useStyles } from './styles'
 import Input from './Input';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from 'jwt-decode';
 
 const Auth = () => {
   // const classes = useStyles();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
@@ -32,14 +35,15 @@ const Auth = () => {
   const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword)
 
   const googleSuccess = (res) => {
-    const result = res?.profileObj;
-    const token = res?.tokenId;
+    const decoded = jwtDecode(res?.credential)
     try {
-      dispatch({ type: 'AUTH', data: { result, token } });
+      dispatch({ type: 'AUTH', data: { decoded } });
+      navigate('/')
     } catch (error) {
       console.log(error)
     }
   }
+
 
   const googleFailure = (error) => {
     console.log(error)
@@ -75,7 +79,7 @@ const Auth = () => {
                   {isSignUp ? 'Already have an account? Sign in' : 'Dont have an account? Sign Up'}
                 </Button>
 
-                {isSignUp && <GoogleLogin onSuccess={googleSuccess} onError={googleFailure} cookiePolicy="single_host_origin" />}
+                <GoogleLogin onSuccess={googleSuccess} onError={googleFailure} cookiePolicy="single_host_origin" />
 
               </Grid>
             </Grid>
