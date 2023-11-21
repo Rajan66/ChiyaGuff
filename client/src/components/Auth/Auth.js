@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Avatar, Button, Typography, Paper, Grid, Container } from '@mui/material';
-import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 
 import LockOutLinedIcon from '@mui/icons-material/LockOutlined'
@@ -43,14 +43,20 @@ const Auth = () => {
 
   const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword)
 
-  const googleSuccess = (res) => {
+  const googleSuccess = async ({ code, res }) => {
     const result = jwtDecode(res?.credential)
-    try {
-      dispatch({ type: 'AUTH', data: { result } });
-      navigate('/')
-    } catch (error) {
-      console.log(error)
-    }
+    const token = await axios.post('http://localhost:3000/user/google', {  // http://localhost:3000/user/google backend that will exchange the code
+      code,
+    });
+
+    console.log(token);
+    console.log(result)
+    // try {
+    //   dispatch({ type: 'AUTH', data: { result ,token} });
+    //   navigate('/')
+    // } catch (error) {
+    //   console.log(error)
+    // }
   }
 
   const googleFailure = (error) => {

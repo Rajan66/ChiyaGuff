@@ -1,8 +1,7 @@
 import React from 'react'
 import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite'
+import { ThumbUpAlt, ThumbUpAltOutlined } from '@mui/icons-material'
 import MessageIcon from '@mui/icons-material/Message'
-import MoreHorizon from '@mui/icons-material/MoreHoriz'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useDispatch } from 'react-redux';
@@ -12,6 +11,23 @@ import { deletePost, likePost } from '../../../actions/posts'
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch()
+  const user = JSON.parse(localStorage.getItem('profile'))
+  console.log(user)
+  console.log(user?.result?.sub)
+  const Likes = () => {
+    if (post.likes.length > 0) {
+      return post.likes.find((like) => like == (user?.result?.sub || user?.result?._id)) ? (
+        <>
+          <ThumbUpAlt fontSize='small' />&nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}`}
+        </>
+      ) : (
+        <>
+          <ThumbUpAltOutlined />&nbsp;{post.likes.length} {post.likes.length === 1 ? 'Like' : 'Likes'}
+        </>
+      )
+    }
+    return <><ThumbUpAltOutlined fontSize='small' />&nbsp;Like</>
+  }
 
   return (
     <div style={{ margin: 15 }}>
@@ -39,21 +55,18 @@ const Post = ({ post, setCurrentId }) => {
             {post.message}
           </Typography>
           <Typography variant="body2" component="p" color="text.secondary">
-            {post.tags}
+            {post.tags.map((tag) => `#${tag} `)}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites" onClick={() => dispatch(likePost(post._id))}>
-            <FavoriteIcon />
+          <IconButton disabled={!user?.result} onClick={() => dispatch(likePost(post._id))}>
+            <Likes />
           </IconButton>
           <IconButton aria-label="share">
             <MessageIcon />
           </IconButton>
         </CardActions>
         <CardContent>
-          <Typography align='left' variant='body2' color="text.secondary">
-            Liked by {post.likeCount}
-          </Typography>
         </CardContent>
       </Card>
     </div>
