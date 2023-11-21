@@ -43,20 +43,20 @@ const Auth = () => {
 
   const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword)
 
-  const googleSuccess = async ({ code, res }) => {
+  const googleSuccess = async (res) => {
     const result = jwtDecode(res?.credential)
-    const token = await axios.post('http://localhost:3000/user/google', {  // http://localhost:3000/user/google backend that will exchange the code
-      code,
-    });
+    // const token = await axios.post('http://localhost:3000/user/google', {  // http://localhost:3000/user/google backend that will exchange the code
+    //   code,
+    // });
 
-    console.log(token);
+    // console.log(token);
     console.log(result)
-    // try {
-    //   dispatch({ type: 'AUTH', data: { result ,token} });
-    //   navigate('/')
-    // } catch (error) {
-    //   console.log(error)
-    // }
+    try {
+      dispatch({ type: 'AUTH', data: { result } });
+      navigate('/')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const googleFailure = (error) => {

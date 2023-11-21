@@ -1,14 +1,14 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import OAuth2Client from 'google-auth-library'
+// import OAuth2Client from 'google-auth-library'
 import User from '../models/user.js'
 
 
-const oAuth2Client = new OAuth2Client(
-    process.env.CLIENT_ID,
-    process.env.CLIENT_SECRET,
-    'postmessage',
-);
+// const oAuth2Client = new OAuth2Client(
+//     process.env.CLIENT_ID,
+//     process.env.CLIENT_SECRET,
+//     'postmessage',
+// );
 
 export const signin = async (req, res) => {
     const { email, password } = req.body
@@ -51,20 +51,20 @@ export const signup = async (req, res) => {
     }
 }
 
-export const googleSignIn = async (req, res) => {
-    const { tokens } = await oAuth2Client.getToken(req.body.code); // exchange code for tokens
-    console.log(tokens);
+// export const googleSignIn = async (req, res) => {
+//     const { tokens } = await oAuth2Client.getToken(req.body.code); // exchange code for tokens
+//     console.log(tokens);
 
-    res.json(tokens);
-}
+//     res.json(tokens);
+// }
 
 
-export const refreshToken = async (req, res) => {
-    const user = new UserRefreshClient(
-        clientId,
-        clientSecret,
-        req.body.refreshToken,
-    );
-    const { credentials } = await user.refreshAccessToken(); // optain new tokens
-    res.json(credentials);
-}
+// export const refreshToken = async (req, res) => {
+//     const user = new UserRefreshClient(
+//         clientId,
+//         clientSecret,
+//         req.body.refreshToken,
+//     );
+//     const { credentials } = await user.refreshAccessToken(); // optain new tokens
+//     res.json(credentials);
+// }
