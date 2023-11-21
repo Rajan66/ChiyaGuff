@@ -17,7 +17,7 @@ const Post = ({ post, setCurrentId }) => {
     <div style={{ margin: 15 }}>
       <CardActions>
         <Typography>
-          {post.creator}
+          {post.name}
         </Typography>
         <IconButton onClick={() => setCurrentId(post._id)}>
           <EditIcon />

@@ -38,15 +38,15 @@ const Auth = () => {
   const switchMode = () => {
     // isSignUp ? setIsSignUp(false) : setIsSignUp(true)
     setIsSignUp((prevIsSignUp) => !prevIsSignUp)
-    handleShowPassword(false)
+    setShowPassword(false)
   }
 
   const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword)
 
   const googleSuccess = (res) => {
-    const decoded = jwtDecode(res?.credential)
+    const result = jwtDecode(res?.credential)
     try {
-      dispatch({ type: 'AUTH', data: { decoded } });
+      dispatch({ type: 'AUTH', data: { result } });
       navigate('/')
     } catch (error) {
       console.log(error)
