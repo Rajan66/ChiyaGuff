@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Avatar, Button, Typography, Paper, Grid, Container } from '@mui/material';
 import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
-
+import axios from 'axios'
 import LockOutLinedIcon from '@mui/icons-material/LockOutlined'
 // import { useStyles } from './styles'
 import Input from './Input';
@@ -42,14 +42,9 @@ const Auth = () => {
   }
 
   const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword)
-
+  // No token passed 
   const googleSuccess = async (res) => {
     const result = jwtDecode(res?.credential)
-    // const token = await axios.post('http://localhost:3000/user/google', {  // http://localhost:3000/user/google backend that will exchange the code
-    //   code,
-    // });
-
-    // console.log(token);
     console.log(result)
     try {
       dispatch({ type: 'AUTH', data: { result } });

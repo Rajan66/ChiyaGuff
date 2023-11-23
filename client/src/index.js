@@ -8,6 +8,7 @@ import { applyMiddleware, compose } from 'redux';
 
 import thunk from 'redux-thunk';
 import reducers from './reducers'
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 // ReactDOM.render(<App />, document.getElementById('root'))
 
@@ -17,9 +18,8 @@ const store = createStore(reducers, compose(applyMiddleware(thunk)))
 const container = document.getElementById('root');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
 root.render(
-
-    <Provider store={store}>
-        <App />
-    </Provider>
-
+  
+        <Provider store={store}>
+            <App />
+        </Provider>
 );
