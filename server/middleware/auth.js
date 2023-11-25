@@ -6,7 +6,7 @@ const auth = async (req, res, next) => {
         const isCustomAuth = token.length < 500;
 
         let decodedData;
-
+        // if user signed in manually we use this
         if (token && isCustomAuth) {
             decodedData = jwt.verify(token, 'test')
 
@@ -15,7 +15,9 @@ const auth = async (req, res, next) => {
             decodedData = jwt.decode(token)
 
             req.userId = decodedData?.sub
+            console.log(decodedData?.sub)
         }
+        // if user signed in by google... sub is google's token
         next()
     } catch (error) {
         console.log(error)

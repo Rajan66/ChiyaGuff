@@ -4,6 +4,7 @@ import useStyles from './styles'
 import logo from '../../images/koala.png'
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from 'react-redux';
+import { jwtDecode } from 'jwt-decode';
 
 
 
@@ -15,7 +16,11 @@ const Navbar = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
 
     useEffect(() => {
-        const token = user?.result;
+        const token = user?.token;
+        if (token) {
+            const decodedToken = jwtDecode(token)
+            if (decodedToken.exp * 1000 < new Date().getTime()) logout()
+        }
         setUser(JSON.parse(localStorage.getItem('profile')))
     }, [location])
 

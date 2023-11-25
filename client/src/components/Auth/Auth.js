@@ -44,10 +44,11 @@ const Auth = () => {
   const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword)
   // No token passed 
   const googleSuccess = async (res) => {
-    const result = jwtDecode(res?.credential)
-    console.log(result)
+    const token = res?.credential;
+    const result = jwtDecode(token);
+
     try {
-      dispatch({ type: 'AUTH', data: { result } });
+      dispatch({ type: 'AUTH', data: { result, token } });
       navigate('/')
     } catch (error) {
       console.log(error)

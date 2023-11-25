@@ -12,12 +12,10 @@ import { deletePost, likePost } from '../../../actions/posts'
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch()
   const user = JSON.parse(localStorage.getItem('profile'))
-  console.log(user)
-  // googleId is undefined.. instead we can use sub?
-  console.log(user?.result?.googleId)
+
   const Likes = () => {
     if (post.likes.length > 0) {
-      return post.likes.find((like) => like == (user?.result?.googleId || user?.result?._id)) ? (
+      return post.likes.find((like) => like == (user?.result?.sub || user?.result?._id)) ? (
         <>
           <ThumbUpAlt fontSize='small' />&nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}`}
         </>
@@ -36,12 +34,19 @@ const Post = ({ post, setCurrentId }) => {
         <Typography>
           {post.name}
         </Typography>
-        <IconButton onClick={() => setCurrentId(post._id)}>
-          <EditIcon />
-        </IconButton>
-        <IconButton onClick={() => dispatch(deletePost(post._id))}>
-          <DeleteIcon />
-        </IconButton>
+        {(user?.result?.sub === post?.creator || user?.result?._id === post?.creator) && (
+          <IconButton onClick={() => setCurrentId(post._id)}>
+            <EditIcon />
+          </IconButton>
+        )}
+
+        {((user?.result?.sub === post?.creator) || (user?.result?._id === post?.creator)) && (
+          <IconButton onClick={() => dispatch(deletePost(post._id))}>
+            <DeleteIcon />
+          </IconButton>
+        )}
+
+
       </CardActions>
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia className="Post-image"
