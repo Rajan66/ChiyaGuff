@@ -57,7 +57,7 @@ const Auth = () => {
 
   const googleFailure = (error) => {
     console.log(error)
-    console.log('Google Sign In was unsuccessful. Try again later!')
+    alert('Google Sign In was unsuccessful. Try again later!')
   }
 
   return (
@@ -94,7 +94,9 @@ const Auth = () => {
               </Grid>
             </Grid>
           </form>
+          
         </Paper>
+        
       </Container>
     </GoogleOAuthProvider>
 
