@@ -5,13 +5,11 @@ import Form from '../Form/Form'
 import { useNavigate, useLocation } from 'react-router-dom'
 import Chip from '@mui/material/Chip'
 
-
 import { useDispatch } from 'react-redux'
 import { getPosts } from '../../actions/posts'
 import useStyles from './styles'
-
 import Pagination from '../Pagination/Pagination'
-
+import { getPostsBySearch } from '../../actions/posts'
 
 
 function useQuery() {
@@ -36,10 +34,18 @@ const Home = () => {
         dispatch(getPosts());
     }, [currentId, dispatch])
 
+    const searchPost = () => {
+        if (search.trim()) {
+            dispatch(getPostsBySearch({ search, tags: tags.join(',') }))
+        } else {
+            navigate('/')
+        }
+    }
+
     const handleKeyPress = (e) => {
         // keycode 13 means enter key.
         if (e.keyCode === 13) {
-            //search post
+            searchPost()
         }
     }
 
@@ -91,6 +97,7 @@ const Home = () => {
                                     />
                                 )}
                             />
+                            <Button onClick={searchPost} className={classes.searchButton} variant="contained" color='primary'>Search</Button>
                         </AppBar>
                         <Form currentId={currentId} setCurrentId={setCurrentId} />
                         <Paper elevation={6}>

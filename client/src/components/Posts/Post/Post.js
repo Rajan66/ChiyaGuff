@@ -57,6 +57,9 @@ const Post = ({ post, setCurrentId }) => {
           alt="Paella dish"
         />
         <CardContent>
+        <Typography variant="h6" component="p" color="text.primary">
+            {post.title}
+          </Typography>
           <Typography variant="body2" component="p" color="text.secondary">
             {post.message}
           </Typography>
