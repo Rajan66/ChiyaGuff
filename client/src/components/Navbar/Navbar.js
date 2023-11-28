@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 import { jwtDecode } from 'jwt-decode';
 
 
-
 const Navbar = () => {
     const classes = useStyles()
     const navigate = useNavigate()
@@ -33,8 +32,9 @@ const Navbar = () => {
     return (
         <AppBar className={classes.appbar} position="static" style={{ flexDirection: "row" }} color="inherit">
             <div classes={classes.brandContainer}>
-                <Typography component={Link} to="/" className={classes.heading} variant="h2" align='left'>SocialSphere</Typography>
-                <img className={classes.image} src={logo} alt="memories" height="60" align='right' />
+                <img className={classes.image} src={logo} alt="icon" height="60" align='left' />
+                <Typography component={Link} to="/" className={classes.heading} variant="h2" align='right'>SocialSphere</Typography>
+
             </div>
             <Toolbar className={classes.toolbar} >
                 {user ? (<div classes={classes.profile}>
