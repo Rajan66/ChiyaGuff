@@ -35,8 +35,9 @@ const Home = () => {
     }, [currentId, dispatch])
 
     const searchPost = () => {
-        if (search.trim()) {
+        if (search.trim() || tags) {
             dispatch(getPostsBySearch({ search, tags: tags.join(',') }))
+            navigate(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`)
         } else {
             navigate('/')
         }
@@ -80,6 +81,7 @@ const Home = () => {
                                 renderTags={(value, getTagProps) =>
                                     value.map((option, index) => {
                                         setTags(value);
+                                        console.log(tags)
                                         return (
                                             <Chip
                                                 key={index}
@@ -94,6 +96,7 @@ const Home = () => {
                                     <TextField
                                         {...params}
                                         label="Search Tags"
+                                        placeholder='Search Tags (Press enter to add)'
                                     />
                                 )}
                             />

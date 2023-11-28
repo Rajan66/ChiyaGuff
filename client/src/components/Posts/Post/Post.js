@@ -48,7 +48,7 @@ const Post = ({ post, setCurrentId }) => {
 
 
       </CardActions>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 345 }} raised elevation={6}>
         <CardMedia className="Post-image"
           component="img"
           height="200"
