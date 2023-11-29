@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, Pagination, PaginationItem } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getPosts } from "../../actions/posts";
 
 import useStyles from "./styles";
 
-const Paginate = () => {
+const Paginate = ({ page }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (page) {
+      dispatch(getPosts(page));
+    }
+  }, [page]);
 
   return (
     <Pagination
