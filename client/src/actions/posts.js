@@ -3,9 +3,9 @@ import * as api from '../api';
 
 //Action Creators
 
-export const getPosts = (patch) => async (dispatch) => {
+export const getPosts = (page) => async (dispatch) => {
     try {
-        const { data } = await api.fetchPosts(patch);
+        const { data } = await api.fetchPosts(page);
         
         dispatch({ type: FETCH_ALL, payload: data });
     }

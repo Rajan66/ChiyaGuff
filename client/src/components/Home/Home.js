@@ -6,7 +6,6 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import Chip from '@mui/material/Chip'
 
 import { useDispatch } from 'react-redux'
-import { getPosts } from '../../actions/posts'
 import useStyles from './styles'
 import Pagination from '../Pagination/Pagination'
 import { getPostsBySearch } from '../../actions/posts'
@@ -17,18 +16,17 @@ function useQuery() {
 }
 
 const Home = () => {
+    const navigate = useNavigate()
     const classes = useStyles()
     const dispatch = useDispatch();
-    const [currentId, setCurrentId] = useState(null);
 
-    const navigate = useNavigate()
     const query = useQuery()
-
     const page = query.get('page') || 1
     const searchQuery = query.get('searchQuery')
-
+    
     const [search, setSearch] = useState('')
     const [tags, setTags] = useState([])
+    const [currentId, setCurrentId] = useState(null);
 
 
     const searchPost = () => {
@@ -47,8 +45,8 @@ const Home = () => {
         }
     }
 
-    const handleClick = (tag) => setTags([...tags, tag])
-    const handleDelete = (tagToDelete) => setTags(tags.filter((tag) => tag !== tagToDelete))
+    // const handleClick = (tag) => setTags([...tags, tag])
+    // const handleDelete = (tagToDelete) => setTags(tags.filter((tag) => tag !== tagToDelete))
 
     return (
 
@@ -101,7 +99,7 @@ const Home = () => {
                         </AppBar>
                         <Form currentId={currentId} setCurrentId={setCurrentId} />
                         <Paper elevation={6}>
-                            <Pagination page=page/>
+                            <Pagination page={page} />
                         </Paper>
                     </Grid>
                 </Grid>
