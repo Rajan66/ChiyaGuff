@@ -6,10 +6,11 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useDispatch } from 'react-redux';
 
-
+import useStyles from './styles'
 import { deletePost, likePost } from '../../../actions/posts'
 
 const Post = ({ post, setCurrentId }) => {
+  const classes = useStyles()
   const dispatch = useDispatch()
   const user = JSON.parse(localStorage.getItem('profile'))
 
@@ -57,7 +58,7 @@ const Post = ({ post, setCurrentId }) => {
           alt="Paella dish"
         />
         <CardContent>
-        <Typography variant="h6" component="p" color="text.primary">
+          <Typography variant="h6" component="p" color="text.primary">
             {post.title}
           </Typography>
           <Typography variant="body2" component="p" color="text.secondary">

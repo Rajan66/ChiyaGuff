@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import { Avatar, Button, Typography, Paper, Grid, Container } from '@mui/material';
 import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
-import axios from 'axios'
 import LockOutLinedIcon from '@mui/icons-material/LockOutlined'
-// import { useStyles } from './styles'
+import useStyles from './styles'
 import Input from './Input';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
@@ -14,7 +13,7 @@ import { signin, signup } from '../../actions/auth'
 
 const Auth = () => {
   const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '', }
-  // const classes = useStyles();
+  const classes = useStyles();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState(initialState);
@@ -63,12 +62,12 @@ const Auth = () => {
   return (
     <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_API_TOKEN}>
       <Container component="main" maxWidth="xs">
-        <Paper elevation={3}>
-          <Avatar>
+        <Paper elevation={3} className={classes.paper}>
+          <Avatar className={classes.avatar}>
             <LockOutLinedIcon />
           </Avatar>
           <Typography variant='h5'>{isSignUp ? 'Sign Up' : 'Sign In'}</Typography>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className={classes.form}>
             <Grid container spacing={2}>
               {isSignUp && (
                 <>
@@ -82,10 +81,10 @@ const Auth = () => {
               <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
               {isSignUp && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" />}
             </Grid>
-            <Button type="submit" fullWidth variant="contained" color="primary">{isSignUp ? 'Sign Up' : 'Sign In'}</Button>
+            <Button style={{ margin: '8px 0 8px' }} type="submit" fullWidth variant="contained" color="primary">{isSignUp ? 'Sign Up' : 'Sign In'}</Button>
             <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Button onClick={switchMode}>
+              <Grid item style={{ justifyContent: 'center' }} >
+                <Button onClick={switchMode} >
                   {isSignUp ? 'Already have an account? Sign in' : 'Dont have an account? Sign Up'}
                 </Button>
 
@@ -94,9 +93,9 @@ const Auth = () => {
               </Grid>
             </Grid>
           </form>
-          
+
         </Paper>
-        
+
       </Container>
     </GoogleOAuthProvider>
 

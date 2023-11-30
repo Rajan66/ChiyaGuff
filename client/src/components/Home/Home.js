@@ -12,7 +12,7 @@ import { getPostsBySearch } from '../../actions/posts'
 
 
 function useQuery() {
-    return new URLSearchParams(useLocation.search)
+    return new URLSearchParams(useLocation().search)
 }
 
 const Home = () => {
@@ -23,7 +23,7 @@ const Home = () => {
     const query = useQuery()
     const page = query.get('page') || 1
     const searchQuery = query.get('searchQuery')
-    
+
     const [search, setSearch] = useState('')
     const [tags, setTags] = useState([])
     const [currentId, setCurrentId] = useState(null);
@@ -98,9 +98,12 @@ const Home = () => {
                             <Button onClick={searchPost} className={classes.searchButton} variant="contained" color='primary'>Search</Button>
                         </AppBar>
                         <Form currentId={currentId} setCurrentId={setCurrentId} />
-                        <Paper elevation={6}>
-                            <Pagination page={page} />
-                        </Paper>
+                        {(!searchQuery && !tags.length) && (
+                            <Paper elevation={6}>
+                                <Pagination page={page} className={classes.pagination} />
+                            </Paper>
+                        )}
+
                     </Grid>
                 </Grid>
             </Container>
