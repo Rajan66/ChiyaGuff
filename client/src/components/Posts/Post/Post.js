@@ -1,5 +1,5 @@
 import React from 'react'
-import "../"
+import "./styles.css"
 import { Card, CardMedia, CardContent, CardActions, Typography, Button, Divider, Grid } from '@mui/material';
 import { ThumbUpAlt, ThumbUpAltOutlined } from '@mui/icons-material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
@@ -30,31 +30,31 @@ const Post = ({ post, setCurrentId }) => {
 
   return (
 
-    <Card raised elevation={6} className={styles.card}>
-      <CardMedia className={styles.media}
+    <Card raised elevation={6} className="card" style={{width:"100%"}}>
+      <CardMedia className="media"
         image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.title} />
 
-      <div className={styles.overlay}>
+      <div className="overlay">
         <Typography variant="h6">{post.name}</Typography>
         <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
       </div>
 
-      <div className={styles.overlay2}>
+      <div className="overlay2">
         {(user?.result?.sub === post?.creator || user?.result?._id === post?.creator) && (
           <Button style={{ color: 'white' }} size="small" onClick={() => setCurrentId(post._id)}><MoreHorizIcon fontSize="default" /></Button>
         )}
       </div>
 
-      <div className={styles.details}>
+      <div className="details">
         <Typography variant="body2" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
       </div>
 
-      <Typography className={styles.title} gutterBottom variant="h5" component="h2">{post.title}</Typography>
+      <Typography className="title" gutterBottom variant="h5" component="h2">{post.title}</Typography>
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
       </CardContent>
 
-      <CardActions className={styles.cardActions}>
+      <CardActions className="cardActions">
 
         <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}>
           <Likes />
