@@ -7,8 +7,9 @@ import Chip from '@mui/material/Chip'
 
 import { useDispatch } from 'react-redux'
 import useStyles from './styles'
-import Pagination from '../Pagination/Pagination'
-import { getPostsBySearch } from '../../actions/posts'
+
+
+import { getPosts, getPostsBySearch } from '../../actions/posts'
 
 
 function useQuery() {
@@ -21,13 +22,16 @@ const Home = () => {
     const dispatch = useDispatch();
 
     const query = useQuery()
-    const page = query.get('page') || 1
     const searchQuery = query.get('searchQuery')
 
     const [search, setSearch] = useState('')
     const [tags, setTags] = useState([])
-    const [currentId, setCurrentId] = useState(null);
+    const [currentId, setCurrentId] = useState(0);
 
+    useEffect(() => {
+        dispatch(getPosts());
+
+    }, [currentId, dispatch]);
 
     const searchPost = () => {
         if (search.trim() || tags) {
@@ -45,11 +49,7 @@ const Home = () => {
         }
     }
 
-    // const handleClick = (tag) => setTags([...tags, tag])
-    // const handleDelete = (tagToDelete) => setTags(tags.filter((tag) => tag !== tagToDelete))
-
     return (
-
         <Grow in>
             <Container maxWidth="xl">
                 <Grid container justifyContent="center" >
@@ -98,12 +98,6 @@ const Home = () => {
                             <Button onClick={searchPost} className={classes.searchButton} variant="contained" color='primary'>Search</Button>
                         </AppBar>
                         <Form currentId={currentId} setCurrentId={setCurrentId} />
-                        {(!searchQuery && !tags.length) && (
-                            <Paper elevation={6}>
-                                <Pagination page={page} className={classes.pagination} />
-                            </Paper>
-                        )}
-
                     </Grid>
                 </Grid>
             </Container>
