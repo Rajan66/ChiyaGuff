@@ -24,7 +24,8 @@
     "redux-thunk": "^2.4.2"
   },
   "scripts": {
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "browserslist": {
     "production": [
