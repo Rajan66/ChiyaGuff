@@ -8,8 +8,6 @@ import "./styles.css"
 const Posts = ({ setCurrentId }) => {
     const posts = useSelector((state) => state.posts);
 
-
-    console.log(posts)
     return (
         !posts.length ? <Stack style={{marginTop:"400px", alignItems:"center"}}><CircularProgress color="primary" size="100px"/></Stack> : (
             <Grid className="mainContainer">

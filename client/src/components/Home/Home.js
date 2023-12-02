@@ -76,7 +76,6 @@ const Home = () => {
                                 renderTags={(value, getTagProps) =>
                                     value.map((option, index) => {
                                         setTags(value);
-                                        console.log(tags)
                                         return (
                                             <Chip
                                                 key={index}
