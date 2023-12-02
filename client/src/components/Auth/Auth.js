@@ -61,7 +61,7 @@ const Auth = () => {
 
   return (
     <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_API_TOKEN}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" style={{ marginTop: "100px" }}>
         <Paper elevation={3} className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutLinedIcon />
@@ -82,7 +82,7 @@ const Auth = () => {
               {isSignUp && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" />}
             </Grid>
             <Button style={{ margin: '8px 0 8px' }} type="submit" fullWidth variant="contained" color="primary">{isSignUp ? 'Sign Up' : 'Sign In'}</Button>
-            <Grid container justifyContent="flex-end">
+            <Grid container style={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
               <Grid item style={{ justifyContent: 'center' }} >
                 <Button onClick={switchMode} >
                   {isSignUp ? 'Already have an account? Sign in' : 'Dont have an account? Sign Up'}

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { AppBar, Avatar, Button, Toolbar, Typography } from '@mui/material'
-import useStyles from './styles'
 import logo from '../../images/koala.png'
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from 'react-redux';
@@ -8,7 +7,7 @@ import { jwtDecode } from 'jwt-decode';
 
 
 const Navbar = () => {
-    const classes = useStyles()
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const location = useLocation()
@@ -30,22 +29,29 @@ const Navbar = () => {
     }
 
     return (
-        <AppBar className={classes.appbar} position="static" style={{ flexDirection: "row" }} color="inherit">
-            <div classes={classes.brandContainer}>
-                <img className={classes.image} src={logo} alt="icon" height="60" align='left' />
-                <Typography component={Link} to="/" className={classes.heading} variant="h2" align='right'>SocialSphere</Typography>
+        <section id="home">
+            <AppBar className="appBar" style={{ flexDirection: "row", justifyContent: "space-between" }} color="inherit">
+                <div className="brandContainer">
+                    <img className="image" src={logo} alt="icon" height="60" />
+                    <Typography component={Link} to="/" className="heading" variant="h3">SocialSphere</Typography>
 
-            </div>
-            <Toolbar className={classes.toolbar} >
-                {user ? (<div classes={classes.profile}>
-                    <Avatar alt={user.result.name} src={user.result.picture}>{user.result.name.charAt(0)}</Avatar>
-                    <Typography className={classes.username} variant='h6'>{user.result.name}</Typography>
-                    <Button variant='contained' className={classes.logout} color='secondary' onClick={logout}>Logout</Button>
+                </div>
+
+                <Toolbar className="toolbar" >
+                    {user ? (<div classes="profile" style={{ display: 'flex', justifyContent: "space-between" }}>
+                    <div>
+                        <Avatar alt={user.result.name} src={user.result.picture}>{user.result.name.charAt(0)}</Avatar>
+                    </div>
+                    {/* <Typography className="username" variant='h6'>{user.result.name}</Typography> */}
+
+                    <Button variant='contained' style={{marginLeft:"20px"}} color='secondary' onClick={logout}>Logout</Button>
                 </div>) : (
-                    <Button component={Link} to='/auth' variant='contained' color='primary'>Sign In</Button>
-                )}
+                <Button component={Link} to='/auth' variant='contained' color='primary'>Sign In</Button>
+                    )}
             </Toolbar>
+
         </AppBar>
+        </section >
     )
 }
 

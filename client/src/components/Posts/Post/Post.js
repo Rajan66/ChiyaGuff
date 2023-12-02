@@ -7,6 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import { useDispatch } from 'react-redux';
 import moment from 'moment'
 import { deletePost, likePost } from '../../../actions/posts'
+import { HashLink as Link } from 'react-router-hash-link'
 
 const Post = ({ post, setCurrentId }) => {
 
@@ -30,7 +31,7 @@ const Post = ({ post, setCurrentId }) => {
 
   return (
 
-    <Card raised elevation={6} className="card" style={{width:"100%"}}>
+    <Card raised elevation={6} className="card" style={{ width: "100%" }}>
       <CardMedia className="media"
         image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.title} />
 
@@ -40,20 +41,25 @@ const Post = ({ post, setCurrentId }) => {
       </div>
 
       <div className="overlay2">
-        {(user?.result?.sub === post?.creator || user?.result?._id === post?.creator) && (
-          <Button style={{ color: 'white' }} size="small" onClick={() => setCurrentId(post._id)}><MoreHorizIcon fontSize="default" /></Button>
-        )}
+        <Link to="#home" smooth>
+          {(user?.result?.sub === post?.creator || user?.result?._id === post?.creator) && (
+            <Button style={{ color: 'white' }} size="small" onClick={() => {
+              setCurrentId(post._id)
+            }}><MoreHorizIcon fontSize="default" /></Button>
+          )}
+        </Link>
       </div>
 
       <div className="details">
         <Typography variant="body2" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
       </div>
 
-      <Typography className="title" gutterBottom variant="h5" component="h2">{post.title}</Typography>
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
-      </CardContent>
-
+      <div className="content">
+        <Typography className="title" gutterBottom variant="h5" component="h2">{post.title}</Typography>
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
+        </CardContent>
+      </div>
       <CardActions className="cardActions">
 
         <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}>

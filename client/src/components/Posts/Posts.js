@@ -11,7 +11,7 @@ const Posts = ({ setCurrentId }) => {
 
     console.log(posts)
     return (
-        !posts.length ? <CircularProgress /> : (
+        !posts.length ? <CircularProgress/> : (
             <Grid className="mainContainer">
                 {posts.map((post) => (
                     <Grid className="actionDiv" key={post._id} item >

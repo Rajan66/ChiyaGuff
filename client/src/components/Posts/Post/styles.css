@@ -1,8 +1,9 @@
 .media {
     height: 0;
-    padding: 56.25%;
+    padding: 30%;
     background-color: rgba(0, 0, 0, 0.5);
     background-blend-mode: darken;
+    size: 25%;
 }
 
 .border {
@@ -10,13 +11,17 @@
 }
 
 .card {
-    display: flex;
-    flex-direction: column;
+   
     width: 100px;
-    justify-content: space-between;
+    
     border-radius: 15px;
     height: 100%;
     position: relative;
+    margin-bottom: 5%;
+}
+
+.content {
+    align-items: start;
 }
 
 .overlay {
@@ -44,6 +49,7 @@
 }
 
 .title {
+    align-items: start;
     padding: 0 16px;
 }
 
