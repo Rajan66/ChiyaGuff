@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { AppBar, Avatar, Button, Toolbar, Typography } from '@mui/material'
-import logo from '../../images/koala.png'
+import logo from '../../images/tea.png'
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { jwtDecode } from 'jwt-decode';
@@ -33,7 +33,7 @@ const Navbar = () => {
             <AppBar className="appBar" style={{ flexDirection: "row", justifyContent: "space-between" }} color="inherit">
                 <div className="brandContainer">
                     <img className="image" src={logo} alt="icon" height="60" />
-                    <Typography component={Link} to="/" className="heading" variant="h3">SocialSphere</Typography>
+                    <Typography component={Link} to="/" className="heading" variant="h3">ChiyaGuff</Typography>
 
                 </div>
 
