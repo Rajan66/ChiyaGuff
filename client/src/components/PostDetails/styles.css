@@ -11,7 +11,7 @@
     width: 100%;
 }
 
-section {
+.section {
     border-radius: 20px;
     margin: 10px;
     flex: 1;
