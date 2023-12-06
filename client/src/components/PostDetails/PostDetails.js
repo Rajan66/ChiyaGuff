@@ -19,7 +19,7 @@ const PostDetails = () => {
   useEffect(() => {
     setIsLoading(true)
     dispatch(getPost(id))
-  setIsLoading(false)
+    setIsLoading(false)
   }, [id])
 
   if (!post) {
@@ -37,7 +37,7 @@ const PostDetails = () => {
 
   return (
     <Paper>
-      <div className="card">
+      <div className="card" style={{ marginTop: "100px" }}>
         <div className="section">
           <Typography variant="h3" component="h2">{post.title}</Typography>
           <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{post.tags?.map((tag) => `#${tag} `)}</Typography>
