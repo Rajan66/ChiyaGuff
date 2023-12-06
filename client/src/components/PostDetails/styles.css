@@ -1,11 +1,11 @@
-media {
+.media {
     border-radius: 20px;
     object-fit: cover;
     width: 100%;
     max-height: 600px;
 }
 
-card {
+.card {
   
     display: flex;
     width: 100%;
@@ -17,15 +17,15 @@ section {
     flex: 1;
 }
 
-imageSection {
+.imageSection {
     margin-left: 20px;
 }
 
-recommendedPosts {
+.recommendedPosts {
     display: flex;
 }
 
-loadingPaper {
+.loadingPaper {
     display: flex;
     justify-content: center;
     align-items: center;
