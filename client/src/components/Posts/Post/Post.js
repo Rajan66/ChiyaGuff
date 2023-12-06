@@ -1,6 +1,6 @@
 import React from 'react'
 import "./styles.css"
-import { Card, CardMedia, CardContent, CardActions, Typography, Button, Divider, Grid } from '@mui/material';
+import { Card, CardMedia, CardContent, CardActions, Typography, Button, ButtonBase } from '@mui/material';
 import { ThumbUpAlt, ThumbUpAltOutlined } from '@mui/icons-material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -9,10 +9,14 @@ import moment from 'moment'
 import { deletePost, likePost } from '../../../actions/posts'
 import { HashLink as Link } from 'react-router-hash-link'
 
-const Post = ({ post, setCurrentId }) => {
+import { useNavigate } from 'react-router-dom';
 
+const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem('profile'))
+
+  const openPost = () => navigate(`/posts/${post._id}`)
 
   const Likes = () => {
     if (post.likes.length > 0) {
@@ -32,8 +36,11 @@ const Post = ({ post, setCurrentId }) => {
   return (
 
     <Card raised elevation={6} className="card" style={{ width: "100%" }}>
+
       <CardMedia className="media"
-        image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.title} />
+        image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'}
+        title={post.title}
+        onClick={openPost} />
 
       <div className="overlay">
         <Typography variant="h6">{post.name}</Typography>
@@ -72,6 +79,7 @@ const Post = ({ post, setCurrentId }) => {
           </Button>
         )}
       </CardActions>
+
     </Card>
 
   )
