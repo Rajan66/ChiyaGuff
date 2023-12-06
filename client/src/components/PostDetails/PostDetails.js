@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from 'moment';
 import { useParams, useNavigate } from "react-router-dom"
 
+import "./styles.css"
+
 
 import { getPost } from '../../actions/posts'
 
