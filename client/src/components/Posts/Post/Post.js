@@ -1,5 +1,4 @@
-import React from 'react'
-import "./styles.css"
+import React, { useState } from 'react'
 import { Card, CardMedia, CardContent, CardActions, Typography, Button, ButtonBase } from '@mui/material';
 import { ThumbUpAlt, ThumbUpAltOutlined } from '@mui/icons-material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
@@ -11,22 +10,38 @@ import { HashLink as Link } from 'react-router-hash-link'
 
 import { useNavigate } from 'react-router-dom';
 
+import "./styles.css"
+
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem('profile'))
+  const [likes, setLikes] = useState(post?.likes)
+
 
   const openPost = () => navigate(`/posts/${post._id}`)
 
+  const userId = user?.result?.sub || user?.result?._id
+  const hasLikedPost = post.likes.find((like) => like === (userId))
+
+  const handleLike = async () => {
+    dispatch(likePost(post._id))
+    if (hasLikedPost) {
+      setLikes(post.likes.filter((id) => id !== (userId)))
+    } else {
+      setLikes([...post.likes, userId])
+    }
+  }
+
   const Likes = () => {
-    if (post.likes.length > 0) {
-      return post.likes.find((like) => like == (user?.result?.sub || user?.result?._id)) ? (
+    if (likes.length > 0) {
+      return likes.find((like) => like === (userId)) ? (
         <>
-          <ThumbUpAlt fontSize='small' />&nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}`}
+          <ThumbUpAlt fontSize='small' />&nbsp;{likes.length > 2 ? `You and ${likes.length - 1} others` : `${likes.length} like${likes.length > 1 ? 's' : ''}`}
         </>
       ) : (
         <>
-          <ThumbUpAltOutlined />&nbsp;{post.likes.length} {post.likes.length === 1 ? 'Like' : 'Likes'}
+          <ThumbUpAltOutlined />&nbsp;{likes.length} {likes.length === 1 ? 'Like' : 'Likes'}
         </>
       )
     }
@@ -69,7 +84,7 @@ const Post = ({ post, setCurrentId }) => {
       </div>
       <CardActions className="cardActions">
 
-        <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}>
+        <Button size="small" color="primary" onClick={handleLike}>
           <Likes />
         </Button>
 
