@@ -33,3 +33,14 @@ loadingPaper {
     border-radius: 15px;
     height: 39vh;
 }
+
+commentsOuterContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+commentsInnerContainer{
+    height: 200px;
+    overflow-y:auto;
+    margin-right: 30px;
+}
