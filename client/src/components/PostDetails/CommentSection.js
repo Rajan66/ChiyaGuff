@@ -28,7 +28,7 @@ const CommentSection = ({ post }) => {
                     <Typography gutterBottom variant="h6">Comments</Typography>
                     {comments?.map((c, i) => (
                         <Typography key={i} gutterBottom variant='subtitle1'>
-                            Comment {c}
+                            {c}
                         </Typography>
                     ))}
                     <div ref={commentsRef} />

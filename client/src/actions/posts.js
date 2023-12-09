@@ -51,6 +51,7 @@ export const createPost = (post) => async (dispatch) => {
 export const updatePost = (id, post) => async (dispatch) => {
     try {
         const { data } = await api.updatePost(id, post);
+        console.log(data)
         dispatch({ type: UPDATE, payload: data });
     }
     catch (error) {
@@ -79,9 +80,8 @@ export const likePost = (id) => async (dispatch) => {
 export const commentPost = (value, id) => async (dispatch) => {
     try {
         const { data } = await api.comment(value, id);
-        
+        console.log(data)
         dispatch({ type: COMMENT, payload: data });
-
         return data.comments
     } catch (error) {
         console.log(error);

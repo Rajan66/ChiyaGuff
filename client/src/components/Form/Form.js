@@ -17,7 +17,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
     const handleSubmit = (e) => {
         // if you uncomment this it wont refresh the page but show the changes ... is kinda slow tho
-        // e.preventDefault() 
+        e.preventDefault() 
         if (currentId) {
             postData.updatedAt = moment.now()
         

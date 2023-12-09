@@ -39,8 +39,8 @@ const PostDetails = () => {
   return (
     <>
       <Paper>
-        <div className="card" style={{ marginTop: "100px" }}>
-          <div className="section">
+        <div style={{ marginTop: "100px", display: "flex", width: "100%" }}>
+          <div style={{ borderRadius: " 20px", margin: "10px", flex: "1" }}>
             <Typography variant="h3" component="h2">{post.title}</Typography>
             <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{post.tags?.map((tag) => `#${tag} `)}</Typography>
             <Typography gutterBottom variant="body1" component="p">{post.message}</Typography>
@@ -52,11 +52,20 @@ const PostDetails = () => {
             <CommentSection post={post} />
             <Divider style={{ margin: '20px 0' }} />
           </div>
-          <div className="imageSection">
-            <img className="media" src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />
+
+          <div style={{ marginLeft: "20px" }}>
+            <img
+              style={{
+                borderRadius: "20px",
+                width: "100%",
+                maxHeight: "600px"
+              }}
+              src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'}
+              alt={post.title}
+            />
           </div>
         </div>
-      </Paper>
+      </Paper >
 
     </>
   )
