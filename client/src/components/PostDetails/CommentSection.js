@@ -16,6 +16,7 @@ const CommentSection = ({ post }) => {
 
     useEffect(() => {
         setComments(post?.comments)
+        
     }, comments)
 
     const handleClick = async () => {
