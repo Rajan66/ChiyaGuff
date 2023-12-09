@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Typography, TextField, Button } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { commentPost } from '../../actions/posts'
@@ -8,7 +8,6 @@ import "./styles.css"
 const CommentSection = ({ post }) => {
 
     const dispatch = useDispatch()
-    const commentsRef = useRef()
     const user = JSON.parse(localStorage.getItem('profile'))
     const [comments, setComments] = useState(null)
     const [comment, setComment] = useState('')
@@ -25,7 +24,7 @@ const CommentSection = ({ post }) => {
         setComments(newComments)
         setComment('')
 
-        commentsRef.current.scrollIntoView({ behavior: 'smooth' }, 100)
+
     }
 
     return (
@@ -38,7 +37,6 @@ const CommentSection = ({ post }) => {
                             {c}
                         </Typography>
                     ))}
-                    <div ref={commentsRef} />
                 </div>
                 {user?.result?.name && (
                     <div style={{ width: '70%' }}>
