@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Typography, TextField, Button } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { commentPost } from '../../actions/posts'
@@ -6,11 +6,16 @@ import { commentPost } from '../../actions/posts'
 import "./styles.css"
 
 const CommentSection = ({ post }) => {
+    console.log(post.comments)
     const dispatch = useDispatch()
     const commentsRef = useRef()
     const user = JSON.parse(localStorage.getItem('profile'))
     const [comments, setComments] = useState(post?.comments)
     const [comment, setComment] = useState('')
+
+    useEffect(()=>{
+        setComments(post?.comments)
+    },[])
 
     const handleClick = async () => {
         const finalComment = `${user.result.name}: ${comment}`
@@ -18,7 +23,7 @@ const CommentSection = ({ post }) => {
         setComments(newComments)
         setComment('')
 
-        commentsRef.current.scrollIntoView({ behavior: 'smooth' })
+        commentsRef.current.scrollIntoView({ behavior: 'smooth' },100)
     }
 
     return (
