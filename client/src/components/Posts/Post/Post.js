@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Card, CardMedia, CardContent, CardActions, Typography, Button, Paper, Divider } from '@mui/material';
 import { ThumbUpAlt, ThumbUpAltOutlined } from '@mui/icons-material'
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
+import MoreHorizIcon from '@mui/icons-material/EditNoteOutlined'
 import DeleteIcon from '@mui/icons-material/Delete'
 
 import { HashLink as Link } from 'react-router-hash-link'
@@ -59,9 +59,9 @@ const Post = ({ post, setCurrentId }) => {
         <div className="overlay2">
           <Link to="#home" smooth>
             {(user?.result?.sub === post?.creator || user?.result?._id === post?.creator) && (
-              <Button style={{ color: 'white' }} size="small" onClick={() => {
+              <Button style={{ color: 'white' }} onClick={() => {
                 setCurrentId(post._id)
-              }}><MoreHorizIcon fontSize="default" /></Button>
+              }}><MoreHorizIcon fontSize="large" /></Button>
             )}
           </Link>
         </div>
