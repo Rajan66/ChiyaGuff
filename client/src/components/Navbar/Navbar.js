@@ -5,7 +5,6 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { jwtDecode } from 'jwt-decode';
 
-
 const Navbar = () => {
 
     const navigate = useNavigate()
@@ -31,13 +30,14 @@ const Navbar = () => {
     return (
         <section id="home">
             <AppBar className="appBar" style={{ flexDirection: "row", justifyContent: "space-between" }} color="inherit">
+
                 <div className="brandContainer">
                     <img className="image" src={logo} alt="icon" height="60" />
                     <Typography component={Link} to="/posts" className="heading" variant="h3">ChiyaGuff</Typography>
-
                 </div>
 
-                <Toolbar className="toolbar" >
+
+                <Toolbar className="toolbar"  >
                     {user ? (<div classes="profile" style={{ display: 'flex', justifyContent: "space-between" }}>
                         <div>
                             <Avatar alt={user.result.name} src={user.result.picture}>{user.result.name.charAt(0)}</Avatar>
@@ -49,7 +49,6 @@ const Navbar = () => {
                         <Button component={Link} to='/auth' variant='contained' color='primary'>Sign In</Button>
                     )}
                 </Toolbar>
-
             </AppBar>
         </section >
     )
