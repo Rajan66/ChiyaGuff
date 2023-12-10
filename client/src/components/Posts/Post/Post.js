@@ -24,26 +24,18 @@ const Post = ({ post, setCurrentId }) => {
 
 
   const userId = user?.result?.sub || user?.result?._id
-  const hasLikedPost = post.likes.find((like) => like === (userId))
+  const hasLikedPost = post.likes.find((like) => like == (userId))
 
-  const handleLike = async () => {
-    dispatch(likePost(post._id))
-    if (hasLikedPost) {
-      setLikes(post.likes.filter((id) => id !== (userId)))
-    } else {
-      setLikes([...post.likes, userId])
-    }
-  }
 
   const Likes = () => {
-    if (post?.likes?.length > 0) {
+    if (post.likes.length > 0) {
       return hasLikedPost ? (
         <>
-          <ThumbUpAlt fontSize='small' />&nbsp;{likes.length > 2 ? `You and ${likes.length - 1} others` : `${likes.length} like${likes.length > 1 ? 's' : ''}`}
+          <ThumbUpAlt fontSize='small' />&nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}`}
         </>
       ) : (
         <>
-          <ThumbUpAltOutlined />&nbsp;{likes.length} {likes.length === 1 ? 'Like' : 'Likes'}
+          <ThumbUpAltOutlined />&nbsp;{post.likes.length} {post.likes.length === 1 ? 'Like' : 'Likes'}
         </>
       )
     }
@@ -86,7 +78,7 @@ const Post = ({ post, setCurrentId }) => {
         </div>
         <CardActions className="cardActions">
 
-          <Button size="small" color="primary" onClick={handleLike}>
+          <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}>
             <Likes />
           </Button>
 
