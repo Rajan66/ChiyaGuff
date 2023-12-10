@@ -44,7 +44,7 @@ const PostDetails = () => {
         <div style={{ marginTop: "90px", display: "flex", width: "100%" }}>
           <div style={{ borderRadius: " 20px", margin: "20px", padding: "8px",width:"70%" }}>
             <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
-              <Avatar alt={user.result.name} src={user.result.picture} style={{}}>{user.result.name.charAt(0)}</Avatar>
+              <Avatar alt={post.name}>{post?.name?.charAt(0)}</Avatar>
               <div style={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
                 <Typography variant="body1" style={{ fontWeight: "bold", marginLeft: "10px" }}>{post.name}</Typography>
                 <Typography variant="caption">{moment(post.createdAt).fromNow()}</Typography>

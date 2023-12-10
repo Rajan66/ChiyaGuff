@@ -33,7 +33,7 @@ const Navbar = () => {
             <AppBar className="appBar" style={{ flexDirection: "row", justifyContent: "space-between" }} color="inherit">
                 <div className="brandContainer">
                     <img className="image" src={logo} alt="icon" height="60" />
-                    <Typography component={Link} to="/" className="heading" variant="h3">ChiyaGuff</Typography>
+                    <Typography component={Link} to="/posts" className="heading" variant="h3">ChiyaGuff</Typography>
 
                 </div>
 
