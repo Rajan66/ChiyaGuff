@@ -15,7 +15,7 @@ const CommentSection = ({ post }) => {
 
     useEffect(() => {
         setComments(post?.comments)
-        
+
     }, comments)
 
     const handleClick = async () => {
@@ -38,23 +38,26 @@ const CommentSection = ({ post }) => {
                         </Typography>
                     ))}
                 </div>
-                {user?.result?.name && (
-                    <div style={{ width: '70%' }}>
-                        <Typography gutterBottom variant="h6">Write a comment</Typography>
-                        <TextField
-                            fullWidth
-                            rows={4}
-                            variant='outlined'
-                            label='Comment'
-                            multiline
-                            value={comment}
-                            onChange={(e) => setComment(e.target.value)}
-                        />
-                        <Button style={{ marginTop: '10px' }} fullWidth disabled={!comment} color="primary" variant="contained" onClick={handleClick} >
-                            Comment
-                        </Button>
-                    </div>
-                )}
+                <div>
+                    {user?.result?.name && (
+                        <div style={{ width: '100%' }}>
+                            <Typography gutterBottom variant="h6">Write a comment</Typography>
+                            <TextField
+                                fullWidth
+                                rows={4}
+                                variant='outlined'
+                                label='Comment'
+                                multiline
+                                value={comment}
+
+                                onChange={(e) => setComment(e.target.value)}
+                            />
+                            <Button style={{ marginTop: '10px' }} fullWidth disabled={!comment} color="primary" variant="contained" onClick={handleClick} >
+                                Comment
+                            </Button>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     )
