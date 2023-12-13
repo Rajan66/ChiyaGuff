@@ -63,23 +63,32 @@ const Navbar = () => {
             >
                 <ul>
 
-                    {user ? (<div classes="profile" style={{ display: 'flex', justifyContent: "space-between" }}>
+                    {user ? (<div className="parent">
                         <li>
-                            <div>
-                                <Avatar alt={user.result.name} src={user.result.picture}>{user.result.name.charAt(0)}</Avatar>
+                            <div className="child">
+                                {!isNavExpanded ?
+                                    (<Avatar alt={user.result.name} src={user.result.picture}>{user.result.name.charAt(0)}</Avatar>) :
+                                    (<div style={{ display: 'flex', alignItems: 'center' }}>
+                                        <Avatar alt={user.result.name} src={user.result.picture}>{user.result.name.charAt(0)}</Avatar>
+                                        <Typography>{user.result.name}</Typography>
+                                    </div>)}
                             </div>
                         </li>
                         <li>
-                            <Button variant='contained' style={{ marginLeft: "20px" }} color='secondary' onClick={logout}>Logout</Button>
+                            <div className="child">
+                                <Button variant='contained' color='secondary' onClick={logout}>Logout</Button>
+                            </div>
                         </li>
                     </div>) : (
                         <li>
-                            <Button component={Link} to='/auth' variant='contained' color='primary'>Sign In</Button>
+                            <div className="child">
+                                <Button component={Link} to='/auth' variant='contained' color='primary'>Sign In</Button>
+                            </div>
                         </li>
                     )}
                 </ul>
-            </div>
-        </nav>
+            </div >
+        </nav >
     );
 
     // return (
