@@ -1,0 +1,25 @@
+.loadingPaper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 15px;
+    height: 39vh;
+}
+
+.commentsOuterContainer {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.commentsInnerContainer {
+    height: 100%;
+    overflow-y: auto;
+}
+
+img {
+    max-height: 100%;
+    max-width: 80%;
+    margin: auto;
+}

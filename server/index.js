@@ -20,7 +20,7 @@ app.use('/user', userRoutes)
 const CONNECTION_URL = process.env.CONNECTION_URL;
 const PORT = process.env.PORT || 5000;
 
-app.get('/',(req,res)=>{
+app.get('/', (req, res) => {
     res.send('chalyo hai chalyo')
 })
 
